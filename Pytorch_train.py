@@ -9,7 +9,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import torch
 from sklearn.metrics import f1_score
-from froc import computeFROC, plotFROC
 from sklearn import metrics
 
 os.system('jupyter nbconvert --to python Pytorch_dataloader.ipynb')
@@ -340,10 +339,6 @@ def evaluation(model, list_patient, label_classe, scale, sigma, dim, spacing, ba
     plt.savefig(dir_p_1+'/AUC.png')
 
     plt.close('all')
-
-    sensitivity_list, FPavg_list, _ =computeFROC(proba_map=all_image_seg,ground_truth=all_image_label,allowedDistance=0,nbr_of_thresholds=40)   
-    froc_auc = metrics.auc(FPavg_list,sensitivity_list)
-    plotFROC(FPavg_list,sensitivity_list,dir_p_1+'/FROC.png',froc_auc)
 
     return prob
 
